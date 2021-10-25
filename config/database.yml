@@ -1,0 +1,13 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 2
+
+development:
+  <<: *defaults
+  host: db
+  username: postgres
+  password: password
+  database: inventory
+  port: 5432
+  

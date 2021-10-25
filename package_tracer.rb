@@ -1,11 +1,13 @@
 require 'sinatra'
+require 'sinatra/config_file'
 require 'sinatra/reloader'
-also_reload 'lib/**/*.rb'
+require 'sinatra/activerecord'
 require 'pry'
 require "pg"
 
-DB = PG.connect({ dbname: 'inventory', host: 'db', user: 'postgres', password: 'password' })
+Dir["app/models/**/*.rb"].each { |file| require_relative file }
+Dir["app/modules/**/*.rb"].each { |file| require_relative file }
+# Dir["app/views/**/*.erb"].each { |file| require_relative file }
 
-get '/' do
-  "Andrew Ford Medina."
-end
+require_relative "config/initialize"
+require_relative "app/application"
