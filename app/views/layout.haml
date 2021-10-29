@@ -1,0 +1,26 @@
+%head
+  %link{ rel: "stylesheet", href: "/css/materialize.min.css" }
+  %link{ href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" } 
+  %script{ src: "/js/materialize.min.js" }
+%body
+  .container
+    .row
+      .col.s12
+        %nav
+          .nav-wrapper
+            .col.s2
+              %ul#nav-mobile.left.hide-on-med-and-down
+                %li
+                  %a{href:"/products"} Products
+                %li
+                  %a{href:"/criteria"} Rules
+            .col.s9
+              %form
+                .input-field
+                  %input#search{type:"search", required: true, placeholder: "Search"}
+                  %label.label-icon{for:"search"}
+                    %i.material-icons search
+                  %i.material-icons close
+    .row
+      .col.s12
+        = yield 

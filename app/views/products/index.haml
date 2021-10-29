@@ -1,1 +1,33 @@
-%h1 tamaba?
+.row
+  .col.s2.offset-s10
+    %span.flow-text
+      %a.right.waves-effect.waves-light.btn{href: "/products/new"}
+        %i.material-icons.right add
+        New Product
+  .col.s12
+    -if @products
+      %table.striped.highlight
+        %tr
+          %th Reference No.
+          %th Name
+          %th Category
+          %th Price
+          %th Actions
+        - @products.each do |product|
+          %tr
+            %td 
+              %a{href: "/products/#{product.id}"}= product.reference
+            %td= product.name
+            %td= product.category
+            %td= product.price
+            %td
+              %a.waves-effect.waves-light.btn{href: "/products/#{product.id}/edit"}
+                %i.material-icons.left edit
+                Edit
+              %a.waves-effect.waves-light.btn.red{href: "/products/#{product.id}/destroy"}
+                %i.material-icons.left close
+                Delete
+
+    - else
+      %p.flow-text
+        No Products Available!!!

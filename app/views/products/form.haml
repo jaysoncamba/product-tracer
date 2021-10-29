@@ -1,0 +1,22 @@
+%form{action: "#{url}", method: "#{method}"}
+  %input{type: "hidden", name: "product[id]", id: "product[id]", value: product.id}
+  .row 
+    .input-field.col.s12
+      %input{type: "text", name: "product[reference]", value: product.reference, required: true}
+      %label{for: "product[reference]"} Reference
+  .row 
+    .input-field.col.s12
+      %input{type: "text", name: "product[name]", value: product.name, required: true}
+      %label{for: "product[name]"} Name
+  .row 
+    .input-field.col.s12
+      %input{type: "text", name: "product[category]", value: product.category, required: true}
+      %label{for: "product[category]"} Category
+  .row 
+    .input-field.col.s12
+      %input{type: "number", name: "product[price]", value: product.price, required: true}
+      %label{for: "product[price]"} Price
+  .row 
+    .input-field.col.s12
+      %input{type: "submit"}
+      

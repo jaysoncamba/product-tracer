@@ -80,6 +80,7 @@ GEM
       rack-protection (= 2.1.0)
       sinatra (= 2.1.0)
       tilt (~> 2.0)
+    sinatra-formhelpers-ng (1.9.1)
     temple (0.8.2)
     tilt (2.0.10)
     tzinfo (2.0.4)
@@ -102,6 +103,7 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sinatra-contrib
+  sinatra-formhelpers-ng
 
 BUNDLED WITH
    1.17.2
