@@ -1,1 +1,33 @@
-%h1= @products
+.row
+  .col.s2.offset-s10
+    %span.flow-text
+      %a.right.waves-effect.waves-light.btn{href: "/products/new"}
+        %i.material-icons.right add
+        New Product
+  .col.s12
+    -if @criteria
+      %table.striped.highlight
+        %tr
+          %th Reference No.
+          %th Name
+          %th Category
+          %th Price
+          %th Actions
+        - @criteria.each do |criteria|
+          %tr
+            %td 
+              %a{href: "/criteria/#{product.id}"}= criteria.reference
+            %td= criteria.name
+            %td= criteria.category
+            %td= criteria.price
+            %td
+              %a.waves-effect.waves-light.btn{href: "/criteria/#{criteria.id}/edit"}
+                %i.material-icons.left edit
+                Edit
+              %a.waves-effect.waves-light.btn.red{href: "/criteria/#{criteria.id}/destroy"}
+                %i.material-icons.left close
+                Delete
+
+    - else
+      %p.flow-text
+        No Products Available!!!

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_23_050957) do
+ActiveRecord::Schema.define(version: 2021_10_23_050967) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2021_10_23_050957) do
     t.string "column"
     t.string "values", default: [], array: true
     t.integer "criteria_id"
+    t.integer "weight", default: 1, null: false
+    t.integer "value"
   end
 
 end

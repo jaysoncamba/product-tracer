@@ -1,8 +1,12 @@
 class Rule < ActiveRecord::Base
 
-  REQUIRED_KEYS = %i[name reference category price]
+  REQUIRED_FIELDS = {
+    reference: Array,
+    category: Array,
+    price: Integer
+  }
 
   belongs_to :criteria
   validates :column, :values, presence: true
-  validates :column, inclusion: { in: REQUIRED_KEYS }
+  validates :column, inclusion: { in: REQUIRED_FIELDS.keys }
 end

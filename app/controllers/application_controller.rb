@@ -10,6 +10,10 @@ class ApplicationController < Sinatra::Base
     haml :home
   end
 
+  get "/search" do
+  end
+
+
   helpers do
     def partial(page, options={})
       haml page.to_sym, options.merge!(:layout => false)

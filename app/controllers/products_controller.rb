@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   get '/' do
-    @products = Product.order(id: :desc)
+    @products = Product.all
     haml :"products/index"
   end
 
