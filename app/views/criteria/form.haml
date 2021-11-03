@@ -1,0 +1,28 @@
+%form{action: "#{url}", method: "#{method}"}
+  .row 
+    .input-field.col.s12
+    %input{type: "hidden", name: "criteria[id]", value: criteria.id, required: true}
+      %input{type: "text", name: "criteria[destination]", value: criteria.destination, required: true}
+      %label{for: "criteria[destination]"} Destination
+  
+  - criteria.rules.each do |rule|
+    .row 
+      .input-field.col.s12
+        %input{type: "hidden", name: "rules[#{rule.column}][id]", value: rule.id, required: true}
+        %input{type: "hidden", name: "rules[#{rule.column}][column]", value: rule.column, required: true}
+        %label{for: "rules[#{rule.column}][column]"}= rule.column.capitalize
+      .input-field.col.s12
+        - if rule.value_attribute == 'values'
+          %input{type: 'hidden', name: "rules[#{rule.column}][#{rule.value_attribute}]",
+          id: "rules[#{rule.column}][#{rule.value_attribute}]", value: rule.value_as_string}
+          %select{multiple: "multiple", "data-input-name": "rules[#{rule.column}][#{rule.value_attribute}]"}
+            - Product.distinct(rule.column).pluck(rule.column).each do |selection|
+              %option{value: selection, selected: rule.included_or_equal_to(selection)}= selection
+        - else
+          %input{type: "number", name: "rules[#{rule.column}][#{rule.value_attribute}]", value: rule.value.to_i}
+
+  .row
+    .input-field.col.s12
+      %input.btn{type: "submit", value:"Save"}
+
+  

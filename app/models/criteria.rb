@@ -1,6 +1,5 @@
 class Criteria < ActiveRecord::Base
-  validates :destination, presence: true
-  validate :rules_keys
+  validates :destination, presence: true, uniqueness: true
 
   has_many :rules
 end

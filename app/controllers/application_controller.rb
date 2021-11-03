@@ -11,8 +11,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/search" do
+    if params[:term]
+      @product = Product.find_by reference: params[:term]
+      @destination = ProductDestinationFinder.new(@product).find_product_destination
+    end
+    haml :home
   end
-
 
   helpers do
     def partial(page, options={})

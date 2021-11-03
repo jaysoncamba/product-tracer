@@ -2,6 +2,7 @@
   %link{ rel: "stylesheet", href: "/css/materialize.min.css" }
   %link{ href: "https://fonts.googleapis.com/icon?family=Material+Icons", rel: "stylesheet" } 
   %script{ src: "/js/materialize.min.js" }
+  %script{ src: "/js/application.js" }
 %body
   .container
     .row
@@ -14,13 +15,16 @@
                   %a{href:"/products"} Products
                 %li
                   %a{href:"/criteria"} Rules
-            .col.s9
-              %form
+            %form{action: '/search', method: 'get'}
+              .col.s8  
                 .input-field
-                  %input#search{type:"search", required: true, placeholder: "Search"}
+                  %input#search{type:"search", required: true, placeholder: "Reference No.", name: "term", value: params[:term]}
                   %label.label-icon{for:"search"}
                     %i.material-icons search
-                  %i.material-icons close
+              .col.valign-wrapper
+                .input-field
+                  %input.btn{type: "submit", value: "Search"}
+                  
     .row
       .col.s12
         = yield 

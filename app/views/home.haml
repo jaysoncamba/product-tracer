@@ -1,1 +1,10 @@
 %h1 welcome!
+- if @product
+  .col.s12.m8.offset-m2.l6.offset-l3
+  .card-panel.grey.lighten-5.z-depth-1
+    .row.valign-wrapper
+      .col.s2
+        %img.circle.responsive-img{alt: "", src: ""}/
+      .col.s10
+        %span.black-text
+          ="#{@product.name} destination is #{@destination}"

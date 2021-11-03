@@ -1,25 +1,19 @@
 .row
   .col.s2.offset-s10
     %span.flow-text
-      %a.right.waves-effect.waves-light.btn{href: "/products/new"}
+      %a.right.waves-effect.waves-light.btn{href: "/criteria/new"}
         %i.material-icons.right add
-        New Product
+        New Rules
   .col.s12
     -if @criteria
       %table.striped.highlight
         %tr
-          %th Reference No.
-          %th Name
-          %th Category
-          %th Price
+          %th Destination
           %th Actions
         - @criteria.each do |criteria|
           %tr
             %td 
-              %a{href: "/criteria/#{product.id}"}= criteria.reference
-            %td= criteria.name
-            %td= criteria.category
-            %td= criteria.price
+              %a{href: "/criteria/#{criteria.id}"}= criteria.destination
             %td
               %a.waves-effect.waves-light.btn{href: "/criteria/#{criteria.id}/edit"}
                 %i.material-icons.left edit
@@ -30,4 +24,4 @@
 
     - else
       %p.flow-text
-        No Products Available!!!
+        No Rules Available!!!

@@ -10,12 +10,8 @@ class ProductsController < ApplicationController
   end
 
   post '/' do
-    if params[:product][:id].present?
-      @product =  Product.find(params[:product][:id])
-      @product.update(params[:product])
-    else
-      @product = Product.create(params[:product])
-    end
+    @product = Product.find_or_initialize_by(id: params[:product][:id])
+    @product.update(params[:product])
     redirect to "/#{@product.id}"
   end
 

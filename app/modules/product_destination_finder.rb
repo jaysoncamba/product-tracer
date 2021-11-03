@@ -2,7 +2,7 @@ class ProductDestinationFinder
 
   MAX_POSSIBLE_POINTS = 3
 
-  attr_accessor :product
+  attr_accessor :product, :sql_strings, :sql_values
 
   def initialize(product)
     @product = product
@@ -12,7 +12,7 @@ class ProductDestinationFinder
   end
 
   def find_product_destination
-    criteria.destination
+    criteria&.destination || "No Matching Rules found"
   end
   
   private
@@ -22,10 +22,9 @@ class ProductDestinationFinder
       begin
         build_sql_strings
         rules =
-          Rules.execute(@sql_strings.join(' AND '), **@sql_values.flatten)
-            .group(:criteria_id)
+          Rule.find_by_sql(base_sql_string + @sql_strings.join(' OR ')).group_by(&:criteria_id)
         retrieve_criteria_id(rules)
-        Criteria.find(@criteria_id)
+        Criteria.where(id: @criteria_id).first
       end
   end
 
@@ -43,7 +42,7 @@ class ProductDestinationFinder
 
   def get_score_from_rules(rules)
     rules.sum do |rule|
-      if column == 'price'
+      if rule.column == 'price'
         rule.value.present? ?  1 : 0
       else
         rule.values.empty? ? 0 : 1  
@@ -52,15 +51,16 @@ class ProductDestinationFinder
   end
 
   def build_sql_strings
-    Rule::REQUIRED_KEYS.each do |field, field_klass|
-      case field_klass
-      when Array
-        @sql_strings << 'column = ? AND ( ? = ANY(values) OR (values IS NULL OR values = ?))'
-        @sql_values << [field, @product[field], {}]
-      when Integer
-        @sql_strings << 'column = ? AND (value >= ? OR value IS NULL)'
-        @sql_values << [field, @product[field]]
-      end 
+    Rule::REQUIRED_FIELDS.each do |field, field_klass|
+      if field_klass == Array
+        @sql_strings.push("(rules.column = '#{field}' AND ( '#{@product[field]}' = ANY(rules.values) OR (rules.values IS NULL OR rules.values = '{}')))")
+      elsif field_klass == Integer
+        @sql_strings.push("(rules.column = '#{field}' AND (rules.value >= #{@product[field]} OR rules.value IS NULL))")
+      end
     end
+  end
+  
+  def base_sql_string
+    'SELECT * FROM rules WHERE '
   end
 end
