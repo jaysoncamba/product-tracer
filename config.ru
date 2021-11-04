@@ -1,4 +1,4 @@
-require './config/environment'
+require './app'
 
 use Rack::MethodOverride
 map('/products') { run ProductsController }

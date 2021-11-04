@@ -1,5 +1,4 @@
 Assumptions:
-IF CRITERIA DOESNT HAVE RULES IT WILL BE INCLUDED IN THE MATCHED CRITERIA
 SEARCH BAR ONLY FINDS BASED ON REFERENCE NUMBER
 Rules#value is integer we assumes it only be used in integer fields
 

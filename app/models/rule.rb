@@ -7,8 +7,7 @@ class Rule < ActiveRecord::Base
   }
 
   belongs_to :criteria
-  # validates :column, :values, presence: true
-  validates :column, inclusion: { in: REQUIRED_FIELDS.keys }
+  validates :column, inclusion: { in: REQUIRED_FIELDS.keys }, presence: true
 
   def value_as_string
     values.present? ? values.join(',') : value.to_s

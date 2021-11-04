@@ -20,6 +20,7 @@ class ProductDestinationFinder
   def criteria
     @criteria ||=
       begin
+        return unless @product
         build_sql_strings
         rules =
           Rule.find_by_sql(base_sql_string + @sql_strings.join(' OR ')).group_by(&:criteria_id)

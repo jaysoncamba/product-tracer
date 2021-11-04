@@ -11,3 +11,9 @@ gem 'pg'
 gem 'haml'
 gem 'require_all'
 gem 'racksh'
+
+group :test do
+  gem 'factory_girl'
+  gem 'rspec'
+  gem 'ffaker'
+end
