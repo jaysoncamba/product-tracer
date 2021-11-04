@@ -1,20 +1,33 @@
-Assumptions:
+#  Assumptions:
+
 SEARCH BAR ONLY FINDS BASED ON REFERENCE NUMBER
+
 Rules#value is integer we assumes it only be used in integer fields
 
-Missing:
+# Missing:
+
 Front end validation
+
 Front End error messaging
+
 VALIDATION FOR DEFAULT RULES FOR EACH CRITERIA
-ADDED WEIGHTS TO EACH RULES but not used because lack of time
+
+ADDED WEIGHTS TO EACH RULES but not used.
+
 Tests
 
-How To run:
+# How To run:
+
 docker-compose up
+
 then go to localhost:4567
 
-Running first time.
+# Running first time.
+
 docker-compose up --build
+
 docker ps # get the container ID of product-destination-picker_web
+
 docker exec -it #{CONTAINER_ID} /bin/bash # connect to the web container
+
 rake db:migrate
